@@ -10,43 +10,43 @@ Create a rails controller and template to render a basic home page
 
 Create your app and controller in an app.js or app.js.coffee file
 
-* define my app: faveMovies = angular.module "faveMovies", []
+* define my app:
+  faveMovies = angular.module "faveMovies", []
 
-* create my controller: faveMovies.controller "IndexCtrl", ['$scope', ($scope) ... ]
+* create my controller:
+  faveMovies.controller "IndexCtrl", ['$scope', ($scope) ... ]
 
 Create an array of objects called favoriteMovies and use the ng-repeat directive to iterate over the array of favoriteMovies.
 
 * in app.js.coffee:
 
-```
-$scope.favoriteMovies = [{
-  title: "Lola Versus"
-}]
-```
+  $scope.favoriteMovies = [{
+    title: "Lola Versus"
+  }]
 
 * in index.html.erb:
 
-`<div ng-repeat="movie in favoriteMovies"><p> {{movie.title}}</p></div>`
+  <div ng-repeat="movie in favoriteMovies"><p> {{movie.title}}</p></div>
 
 Add a form outside the ng-repeat in step 4 with an input that allows you to change the background color of the application. This will require you to look at the documentation for ng-style or review the notes. (Hint: Use the backgroundColor key instead of background-color)
 
 * in app.js.coffee:
 
-`$scope.style`
+  $scope.style
 
 * in application.html.erb:
 
-`<body ng-style="{backgroundColor: {{'style'}}}"`
+  <body ng-style="{backgroundColor: {{'style'}}}"
 
 Filter your ng-repeat of movies and order them by name and limit the number displayed to 3
 
 * in app.js.coffee:
 
-`$scope.quantity = 3`
+  $scope.quantity = 3
 
 * in index.html.erb:
 
-`<p>{{movie.title | orderBy: 'title' | limitTo: quantity}}</p>`
+  <p>{{movie.title | orderBy: 'title' | limitTo: quantity}}</p>
 
 Create a custom filter to reverse the letters of the title of your favorite movies
 
@@ -54,12 +54,11 @@ Create a custom filter to reverse the letters of the title of your favorite movi
 
 outside controller:
 
-```
-faveMovies.filter 'reverse', ->
-  (movie) ->
-    movie.split('').reverse().join('')
 
-```
+  faveMovies.filter 'reverse', ->
+    (movie) ->
+      movie.split('').reverse().join('')
+
 
 * in index.html.erb:
 
@@ -69,73 +68,58 @@ Write a function called removeFavorite that removes a favorite movie from your a
 
 * in app.js.coffee:
 
-```
 
-$scope.remove = (movie) ->
-  $scope.favoriteMovies.splice($scope.favoriteMovies.indexOf(movie), 1)
+  $scope.remove = (movie) ->
+    $scope.favoriteMovies.splice($scope.favoriteMovies.indexOf(movie), 1)
 
-
-```
 
 * in index.html.erb:
 
-```
 
-<button ng-click="remove(movie)">Delete</button>
+  <button ng-click="remove(movie)">Delete</button>
 
 
-```
 
 Include the text "I have {{favoriteMovies.length}} favorite(s)" and use ng-pluralize so that the text displays favorite when there is 1 movie and favorites in all other cases
 
 * in index.html.erb:
 
-<p>I have {{favoriteMovies.length}} favorite <ng-pluralize count="favoriteMovies.length" when="{'1' : 'movie', other: 'movies'}"></ng-pluralize></p>
+  <p>I have {{favoriteMovies.length}} favorite <ng-pluralize count="favoriteMovies.length" when="{'1' : 'movie', other: 'movies'}"></ng-pluralize></p>
 
 Add a checkbox that allows the user to see the list of favorite movies when checked and hides the list of movies when unchecked.
 
 * in index.html.erb:
 
-```
+  <input type="checkbox" ng-model="checked">
 
-<input type="checkbox" ng-model="checked">
-
-<div ng-show="checked">MOVIE LIST</div>
-<div ng-hide="checked"></div>
+  <div ng-show="checked">MOVIE LIST</div>
+  <div ng-hide="checked"></div>
 
 
-```
 
 Check out ng-keypress and create an input field and a counter that increments every time the user types a letter.
 
 * in index.html.erb:
 
-```
+  <input type="text" placeholder="Start typing..." ng-keypress="count = count + 1" ng-init="count=0">
+      <p>ALL THE LETTERS!</p>
+      <p>{{ count }}</p>
 
-<input type="text" placeholder="Start typing..." ng-keypress="count = count + 1" ng-init="count=0">
-    <p>ALL THE LETTERS!</p>
-    <p>{{ count }}</p>
-
-
-```
 
 Create a form that takes in a word and then hides it when the form is submitted.
 
 * in app.js.coffee:
 
-```
-
-$scope.$watch "typing", ->
-  if $scope.typing == "sally"
-    $scope.notice = "Got it!"
-    $scope.removed = true
 
 
-```
+  $scope.$watch "typing", ->
+    if $scope.typing == "sally"
+      $scope.notice = "Got it!"
+      $scope.removed = true
+
 
   * in index.html.erb:
 
-```
 
    <div class="magic" ng-hide="removed">
       <p>Do you know the secret password?</p>
@@ -145,4 +129,3 @@ $scope.$watch "typing", ->
 
     {{notice}}
 
-```
