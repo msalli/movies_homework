@@ -63,22 +63,26 @@ faveMovies.filter 'reverse', ->
 
 * in index.html.erb:
 
-`<span>{{ movie.title | reverse }}</span>`
+  <span>{{ movie.title | reverse }}</span>
 
 Write a function called removeFavorite that removes a favorite movie from your array.
 
 * in app.js.coffee:
 
 ```
+
 $scope.remove = (movie) ->
   $scope.favoriteMovies.splice($scope.favoriteMovies.indexOf(movie), 1)
+
 
 ```
 
 * in index.html.erb:
 
 ```
+
 <button ng-click="remove(movie)">Delete</button>
+
 
 ```
 
@@ -93,10 +97,12 @@ Add a checkbox that allows the user to see the list of favorite movies when chec
 * in index.html.erb:
 
 ```
+
 <input type="checkbox" ng-model="checked">
 
 <div ng-show="checked">MOVIE LIST</div>
 <div ng-hide="checked"></div>
+
 
 ```
 
@@ -105,9 +111,11 @@ Check out ng-keypress and create an input field and a counter that increments ev
 * in index.html.erb:
 
 ```
+
 <input type="text" placeholder="Start typing..." ng-keypress="count = count + 1" ng-init="count=0">
     <p>ALL THE LETTERS!</p>
     <p>{{ count }}</p>
+
 
 ```
 
@@ -116,16 +124,19 @@ Create a form that takes in a word and then hides it when the form is submitted.
 * in app.js.coffee:
 
 ```
+
 $scope.$watch "typing", ->
   if $scope.typing == "sally"
     $scope.notice = "Got it!"
     $scope.removed = true
 
-  ```
+
+```
 
   * in index.html.erb:
 
-  ```
+```
+
    <div class="magic" ng-hide="removed">
       <p>Do you know the secret password?</p>
       <input type="text" placeholder="Take a guess" ng-model="typing">
@@ -134,4 +145,4 @@ $scope.$watch "typing", ->
 
     {{notice}}
 
-  ```
+```
