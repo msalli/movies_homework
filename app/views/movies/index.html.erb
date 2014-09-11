@@ -1,0 +1,37 @@
+<input autofocus type="text" placeholder="Enter a color" ng-model="style">
+
+<div ng-controller="IndexCtrl">
+
+  <h2>Want to get to know me? </h2>
+    <h4>Here are my favorite movies of all time: </h4>
+
+    <label for="check">See my movies!</label>
+    <input type="checkbox" id="check" ng-model="checked">
+
+    <div ng-show="checked">
+      <div ng-repeat="movie in favoriteMovies | orderBy: 'title' | limitTo: quantity ">
+        <span>{{ movie.title | reverse }}</span>
+        <button ng-click="remove(movie)">Delete</button>
+      </div>
+    </div>
+
+    <div ng-hide="checked"></div>
+
+      <p>I have {{ favoriteMovies.length }} favorite
+        <ng-pluralize count="favoriteMovies.length" when="{'1' : 'movie', other: 'movies'}"></ng-pluralize>
+      </p>
+
+    <input type="text" placeholder="Start typing..." ng-keypress="count = count + 1" ng-init="count=0">
+    <p>ALL THE LETTERS!</p>
+    <p>{{ count }}</p>
+
+    <div class="magic" ng-hide="removed">
+      <p>Do you know the secret password?</p>
+      <input type="text" placeholder="Take a guess" ng-model="typing">
+      <p> {{ typing }} </p>
+    </div>
+
+    {{notice}}
+
+</div>
+
